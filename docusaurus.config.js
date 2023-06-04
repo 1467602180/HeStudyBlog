@@ -6,6 +6,23 @@ const darkCodeTheme = require("prism-react-renderer/themes/dracula");
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
+  plugins: [
+    () => {
+      return {
+        name: "unocss-plugin",
+        configurePostCss(postcssOptions) {
+          // Appends new PostCSS plugin.
+          postcssOptions.plugins.push([
+            "@unocss/postcss",
+            {
+              content: ["**/*.{html,js,ts,jsx,tsx,vue,svelte,astro,mdx}"],
+            },
+          ]);
+          return postcssOptions;
+        },
+      };
+    },
+  ],
   markdown: {
     mermaid: true,
   },
