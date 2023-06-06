@@ -1,40 +1,25 @@
-import React from "react";
-import clsx from "clsx";
-import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import { animated, useSpring } from "@react-spring/web";
 import Layout from "@theme/Layout";
-import HomepageFeatures from "@site/src/components/HomepageFeatures";
-
-import styles from "./index.module.css";
-
-function HomepageHeader() {
-  const { siteConfig } = useDocusaurusContext();
-  return (
-    <header className={clsx("hero hero--primary", styles.heroBanner)}>
-      <div className="container">
-        <h1 className="hero__title">{siteConfig.title}</h1>
-        <p className="hero__subtitle">{siteConfig.tagline}</p>
-        <div className={styles.buttons}>
-          <Link className="button button--secondary button--lg" to="/blog">
-            阅读博客
-          </Link>
-        </div>
-      </div>
-    </header>
-  );
-}
+import React from "react";
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
+  const [props, api] = useSpring(
+    () => ({
+      from: { opacity: 0 },
+      to: { opacity: 1 },
+    }),
+    []
+  );
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
-      <HomepageHeader />
-      <main>
-        <HomepageFeatures />
-      </main>
+      <animated.div className="h-50 text-40px center" style={props}>
+        HeStudy Blog
+      </animated.div>
     </Layout>
   );
 }
