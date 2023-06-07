@@ -1,25 +1,32 @@
+import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
-import { animated, useSpring } from "@react-spring/web";
 import Layout from "@theme/Layout";
 import React from "react";
+import Typewriter from "typewriter-effect";
 
 export default function Home(): JSX.Element {
   const { siteConfig } = useDocusaurusContext();
-  const [props, api] = useSpring(
-    () => ({
-      from: { opacity: 0 },
-      to: { opacity: 1 },
-    }),
-    []
-  );
+
   return (
     <Layout
       title={`Hello from ${siteConfig.title}`}
       description="Description will go into a meta tag in <head />"
     >
-      <animated.div className="h-50 text-40px center" style={props}>
-        HeStudy Blog
-      </animated.div>
+      <div className="h-50 px-10 text-10 center">
+        <Typewriter
+          onInit={(typewriter) => {
+            typewriter
+              .typeString("HeStudy Blog")
+              .pauseFor(1500)
+              .deleteChars(4)
+              .typeString("Things")
+              .start();
+          }}
+        />
+      </div>
+      <div className="center">
+        <Link to={"/blog"}>阅读文章</Link>
+      </div>
     </Layout>
   );
 }
